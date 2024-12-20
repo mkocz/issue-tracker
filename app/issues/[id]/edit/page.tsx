@@ -1,7 +1,7 @@
-import IssueForm from "@/app/issues/_components/IssueForm";
+// "use client";
 import prisma from "@/prisma/client";
 import { notFound } from "next/navigation";
-import React from "react";
+import IssueFormWrapper from "../../_components/IssueFormWrapper";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -14,7 +14,7 @@ const EditIssuePage = async (props: Props) => {
   });
 
   if (!issue) notFound();
-  return <IssueForm issue={issue} />;
+  return <IssueFormWrapper issue={issue} />;
 };
 
 export default EditIssuePage;
