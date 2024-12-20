@@ -9,7 +9,7 @@ const IssueForm = dynamic(() => import("@/app/issues/_components/IssueForm"), {
 });
 
 const IssueFormWrapper = ({ issue }: { issue?: Issue }) => {
-  return <IssueForm />;
+  return <IssueForm issue={issue} />;
 };
 
 export default IssueFormWrapper;
