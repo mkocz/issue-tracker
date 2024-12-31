@@ -15,25 +15,25 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
 
   const assignIssuue = (userId: string) => {
     axios
-      .patch("/api/issues" + issue.id, {
-        assignedUserId: userId || null,
+      .patch("/api/issues/" + issue.id, {
+        assignedToUserId: userId === "unassigned" ? null : userId,
       })
-      .catch(() => {
-        toast.error("Changes could not be saved.");
+      .catch((error) => {
+        toast.error("Changes could not be saved.", error);
       });
   };
 
   return (
     <>
       <Select.Root
-        defaultValue={issue.assignedToUserId || ""}
+        defaultValue={issue.assignedToUserId || "unassigned"}
         onValueChange={assignIssuue}
       >
         <Select.Trigger placeholder="Assign..." />
         <Select.Content>
           <Select.Group>
             <Select.Label>Suggestions</Select.Label>
-            <Select.Item value="">Unassigned</Select.Item>
+            <Select.Item value="unassigned">Unassigned</Select.Item>
             {users?.map((user) => (
               <Select.Item key={user.id} value={user.id}>
                 {user.name}
