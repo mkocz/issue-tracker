@@ -17,14 +17,23 @@ const columns: { label: string; value: keyof Issue; className?: string }[] = [
 ];
 
 const IssuesPage = async ({ searchParams }: Props) => {
-
-  const searchIssueParams = await searchParams
+  const searchIssueParams = await searchParams;
   const statuses = Object.values(Status);
-  const status = statuses.includes(searchIssueParams.status) ? searchIssueParams.status : undefined;
+  const status = statuses.includes(searchIssueParams.status)
+    ? searchIssueParams.status
+    : undefined;
+
+  const orderBy = columns
+    .map((column) => column.value)
+    .includes(searchIssueParams.orderBy)
+    ? { [searchIssueParams.orderBy]: "asc" }
+    : undefined;
+
   const issues = await prisma.issue.findMany({
     where: {
       status,
     },
+    orderBy,
   });
 
   return (
@@ -38,7 +47,7 @@ const IssuesPage = async ({ searchParams }: Props) => {
                 <NextLink
                   href={JSON.parse(
                     JSON.stringify({
-                      query: { ...searchIssueParams , orderBy: column.value },
+                      query: { ...searchIssueParams, orderBy: column.value },
                     })
                   )}
                 >
