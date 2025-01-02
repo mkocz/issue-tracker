@@ -16,8 +16,8 @@ interface Props {
   issues: Issue[];
 }
 
-const IssueTable = ({ searchParams, issues }: Props) => {
-  //  const searchIssueParams = await searchParams;
+const IssueTable = async ({ searchParams, issues }: Props) => {
+    const searchIssueParams = await searchParams;
 
   return (
     <Table.Root variant="surface">
@@ -31,13 +31,13 @@ const IssueTable = ({ searchParams, issues }: Props) => {
               <NextLink
                 href={JSON.parse(
                   JSON.stringify({
-                    query: { ...searchParams, orderBy: column.value },
+                    query: { ...searchIssueParams, orderBy: column.value },
                   })
                 )}
               >
                 {column.label}
               </NextLink>
-              {column.value === searchParams.orderBy && (
+              {column.value === searchIssueParams.orderBy && (
                 <ArrowUpIcon className="inline" />
               )}
             </Table.ColumnHeaderCell>
