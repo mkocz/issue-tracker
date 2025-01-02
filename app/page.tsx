@@ -1,3 +1,5 @@
-export default function Home() {
-  return <div>Hello</div>;
+import LatestIssues from "./LatestIssues";
+
+export default async function Home() {
+  return <LatestIssues />;
 }
