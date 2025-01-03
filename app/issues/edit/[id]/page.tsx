@@ -1,4 +1,3 @@
-// "use client";
 import prisma from "@/prisma/client";
 import { notFound } from "next/navigation";
 import IssueFormWrapper from "../../_components/IssueFormWrapper";
